@@ -1,0 +1,113 @@
+﻿<Page x:Class="Client.Views.Items"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client.Views"
+      mc:Ignorable="d"
+      d:DesignHeight="350" d:DesignWidth="500"
+      Title="Items">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27*"  />
+            <ColumnDefinition Width="15*"  />
+            <ColumnDefinition Width="15*"  />
+            <ColumnDefinition Width="19*"  />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Grid.RowSpan="5"
+                    Grid.ColumnSpan="3">
+            <DataGrid Margin="10"
+                      AutoGenerateColumns="False"
+                      x:Name="List">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Устройство" 
+                                        Width="95"
+                                        Binding="{Binding Device}"/>
+                    <DataGridTextColumn Header="Датчик" 
+                                        Width="95"
+                                        Binding="{Binding Sensor}"/>
+                    <DataGridTextColumn Header="Время" 
+                                        Width="95"
+                                        Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="Значение" 
+                                        Width="95" 
+                                        Binding="{Binding Value}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0"
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Margin="5 0">
+            <Button Content="Получить данные"
+                    Height="30"
+                    BorderThickness="0"
+                    Foreground="#e0e0e0"
+                    Style="{StaticResource ButtonStyle}" 
+                    Click="GetItemsClick"
+                    x:Name="GetData"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Margin="5 0">
+            <Button Content="Добавить"
+                    Foreground="#e0e0e0"
+                    Style="{StaticResource ButtonStyle}"
+                    Height="30"
+                    Click="AddDeviceClick"
+                    x:Name="Device" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Margin="5 0">
+            <Button Content="Start" 
+                    Height="30"
+                    BorderThickness="0"
+                    Foreground="#e0e0e0"
+                    Style="{StaticResource ButtonStyle}"
+                    Click="StartClick"
+                    x:Name="Start"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3"
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Margin="5 0">
+            <Button Content="Stop"
+                    Foreground="#e0e0e0"
+                    Style="{StaticResource ButtonStyle}"
+                    Height="30"
+                    Click="StopClick"
+                    x:Name="Stop" 
+                    IsEnabled="False"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4"
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Margin="5 0">
+            <Button Content="Поиск"
+                    Foreground="#e0e0e0"
+                    Style="{StaticResource ButtonStyle}"
+                    Height="30"
+                    Click="FilterClick"
+                    x:Name="Filter" />
+        </StackPanel>
+
+    </Grid>
+</Page>

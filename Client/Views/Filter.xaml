@@ -1,0 +1,111 @@
+﻿<Page x:Class="Client.Views.Filter"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Client.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="380"
+      Title="Filter">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Button Content="《" 
+                Margin="5 10"
+                ToolTip="Home"
+                Click="GoHomeClick"/>
+
+        <Label Content="Поиск по Устройствам" 
+               Margin="5"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"
+               Grid.Row="0" 
+               Grid.Column="1"
+               Grid.ColumnSpan="2" />
+
+        <StackPanel Grid.Row="1"
+                    Grid.ColumnSpan="3" 
+                    Grid.RowSpan="1">
+            <DataGrid Margin="10"
+                      AutoGenerateColumns="False"
+                      x:Name="List">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Устройство" 
+                                        Width="95"
+                                        Binding="{Binding Device}"/>
+                    <DataGridTextColumn Header="Датчик" 
+                                        Width="95"
+                                        Binding="{Binding Sensor}"/>
+                    <DataGridTextColumn Header="Время" 
+                                        Width="95"
+                                        Binding="{Binding Time}"/>
+                    <DataGridTextColumn Header="Значение" 
+                                        Width="95" 
+                                        Binding="{Binding Value}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Center"
+                    Margin="5 0">
+            <TextBox Text="От" 
+                     Height="25"
+                     Padding="3"
+                     GotFocus="TopBoxGotFocus"
+                     LostFocus="TopBoxLostFocus"
+                     x:Name="TopDateBox" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    Margin="5 0">
+            <TextBox Text="До" 
+                     Height="25"
+                     Padding="3"
+                     GotFocus="BottomBoxGotFocus"
+                     LostFocus="BottomBoxLostFocus"
+                     x:Name="BottomDateBox" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Center"
+                    Margin="5 0">
+            <TextBox Text="Устройства" 
+                     Height="25"
+                     Padding="3"
+                     GotFocus="TextBoxGotFocus"
+                     LostFocus="TextBoxLostFocus"
+                     x:Name="DeviceName" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3"
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    Margin="5 0" >
+            <Button Content="Поиск..."
+                    Foreground="#efefef"
+                    Height="30"
+                    Style="{StaticResource ButtonStyle}"
+                    Click="SearchClick" />
+        </StackPanel>
+
+    </Grid>
+</Page>
