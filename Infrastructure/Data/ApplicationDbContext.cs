@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Infrastructure.Data
 {
@@ -11,9 +12,14 @@ namespace Infrastructure.Data
 
         public DbSet<Device> Devices { get; set; }
 
+        public ApplicationDbContext()
+        {
+            Database.EnsureCreated();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=ABUBAKR;Database=Test;Trusted_Connection=True;");
+            builder.UseSqlite($"Data Source={Environment.CurrentDirectory}/Test.db");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

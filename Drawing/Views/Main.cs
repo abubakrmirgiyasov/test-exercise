@@ -1,10 +1,12 @@
-﻿using Drawing.Services;
+﻿using Client.Services;
+using Drawing.Services;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Drawing.Services.Rectangle;
 
@@ -112,6 +114,16 @@ namespace Drawing
                 case "Эллипс":
                     DrawEllipse(obj.XAxis, obj.YAxis, obj.Size, obj.SensorValue);
                     _objName = obj.Name;
+                    break;
+                default:
+                    if (new Random().Next(1, 3) == 1)
+                    {
+                        DrawEllipse(5, 5, 5, 2);
+                    }
+                    else
+                    {
+                        DrawRectangle(2, 2, 2, 2);
+                    }
                     break;
             }
 
@@ -298,6 +310,33 @@ namespace Drawing
             else if (SensorValue_TB.Text == string.Empty)
             {
                 throw new Exception("Заполните поле Числовое Значение");
+            }
+        }
+
+        private async void Main_Load(object sender, EventArgs e)
+        {
+            while (true)
+            {
+                var list = new TcpSender().SendObject("DrawObject");
+
+                var objects = Data_LB.Items as dynamic;
+
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    objects[i].SensorValue = list[i].Value;
+
+                    switch (objects[i].Name)
+                    {
+                        case "Прямоугольник":
+                            DrawRectangle(objects[i].XAxis, objects[i].YAxis, objects[i].Size, objects[i].SensorValue);
+                            break;
+                        case "Эллипс":
+                            DrawEllipse(objects[i].XAxis, objects[i].YAxis, objects[i].Size, objects[i].SensorValue);
+                            break;
+                    }
+                }
+
+                await Task.Delay(1000);
             }
         }
     }
